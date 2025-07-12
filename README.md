@@ -1,69 +1,79 @@
-# React + TypeScript + Vite
+# 🛒 Simple Shopping Cart App (React + useReducer)
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This is a beginner-friendly shopping cart web app built using **React**, **TypeScript**, and the **Context API** with `useReducer`. It demonstrates how to manage complex state in a clean and scalable way — like adding/removing products, updating quantities, and calculating totals in a shopping cart.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## ⚙️ Features
 
-## Expanding the ESLint configuration
+- 🧾 **Add items to cart**
+- ➕ **Increase item quantity**
+- ➖ **Decrease item quantity**
+- ❌ **Remove items from cart**
+- 🧹 **Clear entire cart**
+- 💰 **Display total item cost**
+- 🔢 **Show total item count in cart icon**
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+---
 
-```js
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+## 🧠 What I Learned
 
-      // Remove tseslint.configs.recommended and replace with this
-      ...tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      ...tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      ...tseslint.configs.stylisticTypeChecked,
+- How to use **`useReducer`** for managing complex state logic
+- How to define **action types and payloads**
+- How to share state across components using **`createContext`**
+- How to calculate **derived values** like total cost and item count using `.reduce()`
+- The importance of **clean data structures** and separating UI from logic
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+---
+
+## 🏗️ Tech Stack
+
+- React
+- TypeScript
+- Context API
+- useReducer
+- Tailwind CSS (optional for styling)
+
+---
+
+## 📦 Project Structure
+src/
+├── CartContext.tsx # Global cart state using useReducer + Context
+├── Cart.tsx # UI to display and interact with cart items
+├── ProductList.tsx # (Optional) Add product items
+├── App.tsx # Main app component
+
+---
+
+
+## 📐 Data Structure
+```ts
+{
+  id: number;
+  name: string;
+  price: number;
+  quantity: number;
+}
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
-
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+The cart state looks like:
+```ts
+{
+  items: CartItem[];
+}
 ```
+---
+
+## 🔁 Reducer Actions
+```ts
+type Action =
+  | { type: "ADD_ITEM"; payload: CartItem }
+  | { type: "REMOVE_ITEM"; payload: number }
+  | { type: "CLEAR_CART" }
+  | { type: "INCREASE_QUANTITY"; payload: number }
+  | { type: "DECREASE_QUANTITY"; payload: number };
+```
+
+## 🙌 Credits
+
+Built by Solange Ormeño — for learning and practicing advanced React concepts like useReducer and global state management.
